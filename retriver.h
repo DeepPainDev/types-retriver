@@ -9,6 +9,7 @@ struct types {
 	int boolean = 0;
 	int number = 0;
 	int thread = 0;
+	int table = 0;
 	int lightuserdata = 0;
   	int proto = 0; //not in mellons :shock:
 };
@@ -46,6 +47,10 @@ types retrievetypes(int rL) {
   	r_lua_settop(rL, 0);
   	r_lua_pushlightuserdata(rL, NULL);
   	typesfound.lightuserdata = r_lua_type(rL, -1);
+	
+	r_lua_settop(rL, 0);
+	r_lua_getfield(rL, -10002, "table");
+	typesfound.table = r_lua_type(rL, -1);
   
   	r_lua_settop(rL, 0);
   	r_luaF_newproto(rL);
